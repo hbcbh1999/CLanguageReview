@@ -23,7 +23,7 @@ int main(int argc,const char *argv[])
 	free(a);
 	b[2] = 'c';
 
-	c = malloc(16);		//if parameter is smaller than 16, c = a!
+	c = malloc(32);		//if parameter is greater than 16
 	printf("c = %x\n",c);
 	printf("c[7] = %c\n",c[7]);
 	free(c);
