@@ -1,6 +1,6 @@
 CC 		= gcc
 FLAGS 	= -Wall -ggdb
-target 	= useafterfree 
+target 	= useafterfree test 
 
 .PHONY: all clean
 
