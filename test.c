@@ -8,12 +8,13 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+#define NUM 25 //24
 int main(int argc,const char *argv[])
 {
 	char *a, *b, *c;
-	a = malloc(16);
-	b = malloc(16);
-	c = malloc(16);
+	a = malloc(NUM);
+	b = malloc(NUM);
+	c = malloc(NUM);
 
 	printf("a = %x\n",a);
 	printf("b = %x\n",b);
