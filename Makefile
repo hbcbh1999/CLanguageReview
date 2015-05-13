@@ -1,6 +1,6 @@
 CC 		= gcc
 FLAGS 	= -Wall -ggdb
-target 	= useafterfree test 
+target 	= useafterfree testmalloc testmprotect 
 
 .PHONY: all clean
 
