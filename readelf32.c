@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define Elf_Ehdr Elf64_Ehdr
+#define Elf_Ehdr Elf32_Ehdr
 
 void usage(){
 	printf("Usage: readelf elf-file\n");
@@ -49,7 +49,7 @@ void print(Elf_Ehdr *elfheader){
 	printf("  Type:                                %s\n",type);
 	strcpy(machine,"uncomplete");
 	printf("  Machine:                             %s\n",machine);
-	printf("  Version:                             0x%d\n",elfheader->e_version);
+	printf("  Version:                             0x%u\n",elfheader->e_version);
 	printf("  Entry point address:                 0x%x\n",elfheader->e_entry);
 	printf("  Start of program headers:            %lu (bytes into file)\n",elfheader->e_phoff);
 	printf("  Start of section headers:            %lu (bytes into file)\n",elfheader->e_shoff);
