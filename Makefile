@@ -1,6 +1,6 @@
 CC 		= gcc
 FLAGS 	= -Wall -ggdb
-target 	= useafterfree simplemalloc testmalloc testmprotect 
+target 	= useafterfree simplemalloc testmalloc testmprotect readelf 
 
 .PHONY: all clean
 
