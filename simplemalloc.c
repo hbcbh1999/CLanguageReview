@@ -8,27 +8,12 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-char * retptr(){
-	char p, *q;
-	q = &p;
-	return q;
-}
-
 int main(int argc,const char *argv[])
 {
-	char *a, *b, *c;
-	a = malloc(16);
-	printf("a = %p\n",a);
-	b = a+5;
+	char *a;
+	a = malloc(0x10);
+	//printf("a = %p\n",a);
 	free(a);
-	b[2] = 'c';
-
-	c = malloc(32);		//if parameter is greater than 16
-	printf("c = %p\n",c);
-	printf("c[7] = %c\n",c[7]);
-	free(c);
-
-	b = retptr();
-	*b = 'c';
-    return 0;
+	a = NULL;
+	return 0;
 }

@@ -16,9 +16,9 @@ int main(int argc,const char *argv[])
 	b = malloc(NUM);
 	c = malloc(NUM);
 
-	printf("a = %x\n",a);
-	printf("b = %x\n",b);
-	printf("c = %x\n",c);
+	printf("a = %p\n",a);
+	printf("b = %p\n",b);
+	printf("c = %p\n",c);
 	free(a);
 	free(b);
 	free(c);
