@@ -51,8 +51,8 @@ void print(Elf_Ehdr *elfheader){
 	printf("  Machine:                             %s\n",machine);
 	printf("  Version:                             0x%u\n",elfheader->e_version);
 	printf("  Entry point address:                 0x%x\n",elfheader->e_entry);
-	printf("  Start of program headers:            %lu (bytes into file)\n",elfheader->e_phoff);
-	printf("  Start of section headers:            %lu (bytes into file)\n",elfheader->e_shoff);
+	printf("  Start of program headers:            %u (bytes into file)\n",elfheader->e_phoff);
+	printf("  Start of section headers:            %u (bytes into file)\n",elfheader->e_shoff);
 	printf("  Flags:                               0x%x\n",elfheader->e_flags);
 	printf("  Size of this header:                 %u (bytes)\n",elfheader->e_ehsize);
 	printf("  Size of program headers:             %u (bytes)\n",elfheader->e_phentsize);

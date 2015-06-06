@@ -11,13 +11,14 @@
 #include <string.h>
 
 #define Elf_Ehdr Elf64_Ehdr
+#define Elf_Shdr Elf64_Shdr
 
 void usage(){
 	printf("Usage: readelf elf-file\n");
 	exit(-1);
 }
 
-void print(Elf_Ehdr *elfheader){
+void printElfHeader(Elf_Ehdr *elfheader){
 	int index = 0;
 	char machine[30],type[30];
 	printf("ELF Header:\n");
@@ -50,10 +51,10 @@ void print(Elf_Ehdr *elfheader){
 	strcpy(machine,"uncomplete");
 	printf("  Machine:                             %s\n",machine);
 	printf("  Version:                             0x%u\n",elfheader->e_version);
-	printf("  Entry point address:                 0x%x\n",elfheader->e_entry);
-	printf("  Start of program headers:            %llu (bytes into file)\n",elfheader->e_phoff);
-	printf("  Start of section headers:            %llu (bytes into file)\n",elfheader->e_shoff);
-	printf("  Flags:                               0x%x\n",elfheader->e_flags);
+	printf("  Entry point address:                 0x%lux\n",elfheader->e_entry);
+	printf("  Start of program headers:            %lu (bytes into file)\n",elfheader->e_phoff);
+	printf("  Start of section headers:            %lu (bytes into file)\n",elfheader->e_shoff);
+	printf("  Flags:                               0x%ux\n",elfheader->e_flags);
 	printf("  Size of this header:                 %u (bytes)\n",elfheader->e_ehsize);
 	printf("  Size of program headers:             %u (bytes)\n",elfheader->e_phentsize);
 	printf("  Number of program headers:           %u\n",elfheader->e_phnum);
@@ -66,6 +67,9 @@ int main(int argc,const char *argv[])
 {
 	FILE *fp;
 	Elf_Ehdr elfheader;
+	Elf_Shdr strhdr,shdr;
+	unsigned char *strtable;
+	int shnum;
 	if(argc != 2) {
 		usage();	
 	}
@@ -75,6 +79,32 @@ int main(int argc,const char *argv[])
 	}
 	fread(&elfheader, sizeof(char), sizeof(elfheader), fp);
 	/*print out the elf header infomation here*/
-	print(&elfheader);
+	printElfHeader(&elfheader);
+
+ 	fseek(fp, elfheader.e_shoff + elfheader.e_shstrndx * elfheader.e_shentsize, SEEK_SET);
+    fread(&strhdr, sizeof(char), sizeof(strhdr), fp); 
+	/* get the string table header */
+    fseek(fp, strhdr.sh_offset, SEEK_SET);
+    strtable = (unsigned char *)malloc(sizeof(unsigned char)*strhdr.sh_size);
+    fread(strtable, sizeof(char), strhdr.sh_size, fp);
+    fseek(fp, elfheader.e_shoff, SEEK_SET);
+    shnum = elfheader.e_shnum;
+    printf("There are %d section headers, starting at offset 0x%lux\n", shnum,elfheader.e_shoff);
+    while(shnum != 0){
+        fread(&shdr, sizeof(char), sizeof(shdr), fp);
+        printf("sh_name : %s\t", strtable+shdr.sh_name);
+        printf("sh_type : %ux\t", shdr.sh_type);
+        printf("sh_flags : %lu\t", shdr.sh_flags);
+        printf("sh_addr : %lux\t", shdr.sh_addr);
+        printf("sh_offset : %lu\t", shdr.sh_offset);
+        printf("sh_size : %lu\t", shdr.sh_size);
+        printf("sh_link : %u\t", shdr.sh_link);
+        printf("sh_info : %u\t", shdr.sh_info);
+        printf("sh_addralign : %lu\t", shdr.sh_addralign);
+        printf("sh_entsize : %lu\n", shdr.sh_entsize);
+        shnum--;
+    }
+	free(strtable);
+	strtable = NULL;
 	return 0;
 }
