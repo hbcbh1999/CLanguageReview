@@ -14,26 +14,25 @@ void a(int num){
 		p[i] = i;
 	}
 	int n = num / 2;
-	int *tmp = p, *tmp2 = NULL;
+	int *tmp = p;
 	while(1){
 		//printf("n = %d\n", n);
-		tmp2 = malloc(n * sizeof(int));
 		for (i = 0;i < n;i++){
-			tmp2[i] = tmp[i*2+1];
+			tmp[i] = tmp[i*2+1];
 		}
-		free(tmp);
-		tmp = NULL;
 		//for (i = 0;i < n; i++){
-		//	printf("%d\t", tmp2[i]);
+		//	printf("%d\t", tmp[i]);
 		//}
 		//printf("\n");
 		if (n == 1) {
-			printf("%d\n", tmp2[0]);
+			printf("%d\n", tmp[0]);
 			break;
 		}
 		n = n/2;
-		tmp = tmp2;
 	}
+	free(p);
+	p = NULL;
+	tmp = NULL;
 }
 
 int main(int argc,const char *argv[])
