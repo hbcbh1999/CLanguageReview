@@ -92,16 +92,16 @@ int main(int argc,const char *argv[])
     printf("There are %d section headers, starting at offset 0x%lux\n", shnum,elfheader.e_shoff);
     while(shnum != 0){
         fread(&shdr, sizeof(char), sizeof(shdr), fp);
-        printf("sh_name : %s\t", strtable+shdr.sh_name);
-        printf("sh_type : %ux\t", shdr.sh_type);
-        printf("sh_flags : %lu\t", shdr.sh_flags);
-        printf("sh_addr : %lux\t", shdr.sh_addr);
-        printf("sh_offset : %lu\t", shdr.sh_offset);
-        printf("sh_size : %lu\t", shdr.sh_size);
-        printf("sh_link : %u\t", shdr.sh_link);
-        printf("sh_info : %u\t", shdr.sh_info);
-        printf("sh_addralign : %lu\t", shdr.sh_addralign);
-        printf("sh_entsize : %lu\n", shdr.sh_entsize);
+        printf("sh_name : %s\n", strtable+shdr.sh_name);
+        printf("sh_type : %u\n", shdr.sh_type);
+        printf("sh_flags : %lu\n", shdr.sh_flags);
+        printf("sh_addr : %lu\n", shdr.sh_addr);
+        printf("sh_offset : %lu\n", shdr.sh_offset);
+        printf("sh_size : %lu\n", shdr.sh_size);
+        printf("sh_link : %u\n", shdr.sh_link);
+        printf("sh_info : %u\n", shdr.sh_info);
+        printf("sh_addralign : %lu\n", shdr.sh_addralign);
+        printf("sh_entsize : %lu\n\n", shdr.sh_entsize);
         shnum--;
     }
 	free(strtable);
