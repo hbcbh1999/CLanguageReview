@@ -40,6 +40,10 @@ static int __init lp_init(void)
 		tmpNode = list_entry(pos, struct ListNode, list);
 		printk("data : %d\n", tmpNode->num);
 	}
+	list_for_each_entry(tmpNode, &head.list, list)
+	{
+		printk("data : %d \n", tmpNode->num);	
+	}
 
     return 0;
 }
