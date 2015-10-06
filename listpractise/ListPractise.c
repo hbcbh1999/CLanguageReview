@@ -32,7 +32,8 @@ static int __init lp_init(void)
 	{
 		tmpNode = (struct ListNode *)kmalloc(sizeof(struct ListNode), GFP_KERNEL);
 		tmpNode->num = i;
-		list_add(&tmpNode->list, &head.list);
+		//list_add(&tmpNode->list, &head.list);
+		list_add_tail(&tmpNode->list, &head.list);
 	}
 
 	list_for_each_safe(pos, tmp, &head.list)
