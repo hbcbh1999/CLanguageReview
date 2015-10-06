@@ -8,12 +8,12 @@
 #include<stdio.h>
 
 void b(int argc) {
-	printf("b argc = %d\n",argc);
+	printf("b argc = %d\n", argc);
 }
 
 void a(int argc){
 	b(argc+1);
-	printf("a argc = %d\n",argc);
+	printf("a argc = %d\n", argc);
 }
 
 int main(int argc,const char *argv[])
