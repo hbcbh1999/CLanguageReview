@@ -1,5 +1,5 @@
 include ../Makefile
 
-TARGET	= alloca simplemalloc useafterfree
+TARGET	= alloca simplemalloc useafterfree uafvtable
 
 all : $(TARGET)

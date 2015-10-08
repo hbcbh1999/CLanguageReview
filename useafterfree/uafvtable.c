@@ -8,27 +8,32 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-char * retptr(){
-	char p, *q;
-	q = &p;
-	return q;
+struct vtable {
+	void * vptr;
+	int vtguard;
+};
+
+int test(){
+	printf("testing ...\n");
+	return 0;
 }
+
+typedef int (*mFun)();
 
 int main()
 {
-	char *a, *b, *c;
-	a = malloc(16);
+	char *a, *b;
+	a = malloc(24);
 	printf("a = %p\n",a);
-	b = a+5;
 	free(a);
-	b[2] = 'c';
 
-	c = malloc(32);		//if parameter is greater than 16
-	printf("c = %p\n",c);
-	printf("c[7] = %c\n",c[7]);
-	free(c);
+	printf("sizeof struct vtable = %lu\n",sizeof(struct vtable));
 
-	b = retptr();
-	*b = 'c';
+	b = malloc(sizeof(struct vtable));
+	printf("a = %p\n",b);
+	((struct vtable *)a)->vptr = (void *)test;
+
+	mFun m = (mFun)((struct vtable *)b)->vptr;
+	m();
     return 0;
 }
