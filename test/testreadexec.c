@@ -11,6 +11,8 @@
 
 static char *buffer;
 
+#define PRINTMAPS
+
 int main()
 {
     int pagesize;
@@ -27,10 +29,13 @@ int main()
     buffer = mmap((void *)0x600000000000, 20 * pagesize, PROT_READ | PROT_EXEC, MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
     if (buffer == MAP_FAILED)
         handle_error("mmap");
+
+#ifdef PRINTMAPS
 	int pid = getpid();
 	sprintf(command,"cat /proc/%d/maps",pid);
-	//printf("%s\n",command);
+	printf("%s\n",command);
 	system(command);
+#endif
 
-    exit(EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }
