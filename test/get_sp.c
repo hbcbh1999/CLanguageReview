@@ -8,7 +8,11 @@
 #include<stdio.h>
 
 unsigned long sp(void){
-	 asm("mov %rsp, %rax");
+#if defined(__i386__)
+	asm("mov %esp, %eax");
+#elif defined(__x86_64__)
+	asm("mov %rsp, %rax");
+#endif
 }
 int main(int argc,const char *argv[])
 {
