@@ -1,5 +1,5 @@
 CC 			= gcc
-FLAGS 		= -Wall -Wextra -ggdb 
+FLAGS 		= -Wall -Wextra -ggdb -pie -fPIE 
 EXECSTACK	= -z execstack 
 STACKPROT 	= -fstack-protector-all
 
