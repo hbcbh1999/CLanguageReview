@@ -1,5 +1,5 @@
-include ../Makefile
+include ../make.rule
 
-TARGET	= alloca simplemalloc useafterfree uafvtable sbrk
+TARGET	= alloca malloc_chunk mmap mmapfile simplemalloc useafterfree uafvtable sbrk
 
 all : $(TARGET)

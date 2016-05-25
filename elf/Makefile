@@ -1,5 +1,5 @@
-include ../Makefile
+include ../make.rule
 
-TARGET	= readelf32 readelf64 verifyelf
+TARGET	= readelf32 readelf64 verifyelf verifyexec
 
 all : $(TARGET)

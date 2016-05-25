@@ -1,27 +1,8 @@
-# Stack is Executable
-EXECSTACK	= -z execstack 
+DIRS = apue.3e elf fork KernelModule libseccomp Network problem StackProtector sysprogram test useafterfree
+# ldd3-examples : failed to compile
 
-# Stack Protector Options
-STACKPNO 	= -fno-stack-protector
-STACKREG 	= -fstack-protector
-STACKSTRONG = -fstack-protector-strong
-STACKALL 	= -fstack-protector-all
+all:
+	$(foreach dir,$(DIRS),$(MAKE) -C $(dir);)
 
-# Compile options
-CC 			= gcc
-CFLAGS 		= -Wall -Wextra -ggdb -pie -fPIE
-SECFLAGS 	= $(STACKPNO)
-
-.PHONY: all clean
-
-all : $(TARGET)	
-
-%.S : %.c
-	$(CC) -S $(CFLAGS) $(SECFLAGS) -o $@ $<
-
-% : %.c
-	$(CC) $(CFLAGS) $(SECFLAGS) -o $@ $<
-
-clean : 
-	rm -rf $(TARGET)
-	rm -rf *.S
+clean:
+	$(foreach dir,$(DIRS),$(MAKE) clean -C $(dir);)

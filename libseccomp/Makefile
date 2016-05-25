@@ -1,7 +1,7 @@
-include ../Makefile
+include ../make.rule
 
 TARGET	= example seccomp-dev seccompmanpage
 
-FLAGS := $(FLAGS) -lseccomp
+CFLAGS := $(CFLAGS) -lseccomp
 
 all : $(TARGET)
