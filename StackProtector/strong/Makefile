@@ -1,4 +1,4 @@
-include ../../Makefile
+include ../../make.rule
 
 SECFLAGS 	= $(STACKSTRONG)
 TARGET 		= ssp sspstrong
