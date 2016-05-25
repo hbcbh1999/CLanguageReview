@@ -1,17 +1,26 @@
-CC 			= gcc
-FLAGS 		= -Wall -Wextra -ggdb -pie -fPIE 
+# Stack is Executable
 EXECSTACK	= -z execstack 
-STACKPROT 	= -fstack-protector-all
+
+# Stack Protector Options
+STACKPNO 	= -fno-stack-protector
+STACKREG 	= -fstack-protector
+STACKSTRONG = -fstack-protector-strong
+STACKALL 	= -fstack-protector-all
+
+# Compile options
+CC 			= gcc
+CFLAGS 		= -Wall -Wextra -ggdb -pie -fPIE
+SECFLAGS 	= $(STACKPNO)
 
 .PHONY: all clean
 
 all : $(TARGET)	
 
 %.S : %.c
-	$(CC) -S $(FLAGS) -o $@ $<
+	$(CC) -S $(CFLAGS) $(SECFLAGS) -o $@ $<
 
 % : %.c
-	$(CC) $(FLAGS) -o $@ $<
+	$(CC) $(CFLAGS) $(SECFLAGS) -o $@ $<
 
 clean : 
 	rm -rf $(TARGET)
