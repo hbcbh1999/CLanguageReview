@@ -11,11 +11,11 @@
 int main(int argc,const char *argv[])
 {	
 	char buffer[10];
-	char *p = buffer + 1;
-	char *q = argv[1];
-	if (argc < 1) {
+	if (argc < 2) {
 		printf("need one argument"); 
 	}
+	char *p = argv[2];
+	char *q = argv[1];
 	strcpy(p, q);
     return 0;
 }

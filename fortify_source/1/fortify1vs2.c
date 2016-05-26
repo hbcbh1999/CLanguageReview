@@ -18,6 +18,6 @@ struct S {
 
 int main(int argc,const char *argv[])
 {
-	strcpy(&var.t.buf, argv[1]);	
+	strcpy(&var.t.buf[1], argv[1]);	
     return 0;
 }
